@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📒 Contact List</h2>
+
+    <!-- Add Contact Button -->
+    <div class="d-flex justify-content-end mb-3">
+        <a th:href="@{/addContact}" class="btn btn-primary">+ Add New Contact</a>
+    </div>
+
+    <!-- Contacts Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-striped table-hover text-center align-middle">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="contact : ${contacts}">
+                    <td th:text="${contact.id}"></td>
+                    <td th:text="${contact.name}"></td>
+                    <td th:text="${contact.email}"></td>
+                    <td th:text="${contact.mobile}"></td>
+                    <td>
+                        <a th:href="@{/edit/{id}(id=${contact.id})}" class="btn btn-sm btn-warning me-2">✏ Edit</a>
+                        <a th:href="@{/delete/{id}(id=${contact.id})}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this contact?');">🗑 Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional, for interactivity like modals) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
